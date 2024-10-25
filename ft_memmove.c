@@ -1,26 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agedikog <gedikoglu_27@icloud.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/23 21:04:01 by agedikog          #+#    #+#             */
+/*   Updated: 2024/10/24 16:00:19 by agedikog         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void *memcpy(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-    size_t i;
-    unsigned char *pdest;
-    const unsigned char *psrc;
-
-    psrc = (unsigned char*)src;
-    pdest = (unsigned char*)dest;
-    i = len -1;
-
-    if (!dest && !src)
-        return (pdest);
-    if ()
-    {   
-        while (pdest>psrc)
-        {
-            pdest[i]=psrc[i];
-            i--;
-        }
-    }
-    else
-        ft_memcpy(pdest,psrc, len);
-    return (pdest);
+	if (!dst && !src)
+		return (NULL);
+	if (dst < src)
+		ft_memcpy(dst, src, n);
+	else if (dst > src)
+	{
+		while (n--)
+			*((unsigned char *)(dst + n)) = *((unsigned char *)(src + n));
+	}
+	return (dst);
 }
