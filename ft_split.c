@@ -6,88 +6,83 @@
 /*   By: agedikog <gedikoglu_27@icloud.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:48:32 by agedikog          #+#    #+#             */
-/*   Updated: 2024/10/24 13:32:13 by agedikog         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:32:29 by agedikog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* kelimeleri int c ye göre ayırır ve yeni strinler olarak
-	ayırdığı her kelimeyi yeni bir stringin içimne atar */
-static size_t	wordcount(char const *s, char c)
+static size_t	ft_countword(char const *s, char c)
 {
 	size_t	count;
 
+	if (!*s)
+		return (0);
 	count = 0;
 	while (*s)
 	{
-		if (*s != c)
-		{
-			while (*s != c && *s)
-				s++;
+		while (*s == c)
+			s++;
+		if (*s)
 			count++;
-		}
-		if (*s == '\0')
-		{
-			break ;
-		}
-		s++;
+		while (*s != c && *s)
+			s++;
 	}
 	return (count);
 }
 
-static char	*getword(const char *s, char c)
+static void	free_lst(char **lst, int i)
 {
-	size_t	i;
-	char	*str;
-
-	str = 0;
-	i = 0;
-	while (s[i] != c && s[i])
-		i++;
-	str = (char*)malloc(sizeof(char)*(i + 1));
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str,s,i+1);
-	return (str);
+	while (i >= 0)
+	{
+		free(lst[i]);
+		i--;
+	}
+	free(lst);
 }
 
-void	freearray(char **arr)
+static int	process_word(char **lst, const char *s, char c, int i)
 {
-	size_t	i;
+	size_t	word_len;
 
-	i = 0;
-	while (arr[i])
+	if (!ft_strchr(s, c))
+		word_len = ft_strlen(s);
+	else
+		word_len = ft_strchr(s, c) - s;
+	lst[i] = ft_substr(s, 0, word_len);
+	if (!lst[i])
 	{
-		free(arr[i]);
-		i++;
+		free_lst(lst, i - 1);
+		return (0);
 	}
-	free(arr);
+	return (word_len);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
-	size_t	i;
-	size_t	j;
+	char	**lst;
+	int		i;
+	size_t	word_len;
 
-	i = 0;
-	j = 0;
 	if (!s)
 		return (NULL);
-	split = malloc(sizeof(char*)*(wordcount(s,c) + 1));
-	if (!split)
+	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));
+	if (!lst)
 		return (NULL);
-	while (s[i] && j < wordcount(s,c))
+	i = 0;
+	while (*s)
 	{
-		while (s[i] == c && s[i])
+		while (*s == c && *s)
+			s++;
+		if (*s)
+		{
+			word_len = process_word(lst, s, c, i);
+			if (!word_len)
+				return (NULL);
 			i++;
-		split[j] = getword(s + i, c);
-		if (!split[j])
-			freearray(split);
-		i += ft_strlen(split[j]);
-		j++;
+			s += word_len;
+		}
 	}
-	split[j] = NULL;
-	return(split);
+	lst[i] = NULL;
+	return (lst);
 }

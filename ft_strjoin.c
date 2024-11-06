@@ -6,42 +6,37 @@
 /*   By: agedikog <gedikoglu_27@icloud.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:50:16 by agedikog          #+#    #+#             */
-/*   Updated: 2024/10/24 15:49:00 by agedikog         ###   ########.fr       */
+/*   Updated: 2024/10/28 02:54:34 by agedikog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
- char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int i;
-	int j;
-	char *dp;
+	int		i;
+	int		len1;
+	int		len2;
+	char	*str;
 
-	if (!s1 && !s2)
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (str == NULL)
 		return (NULL);
-	if (!s1)
-		return ((char *)s2);
-	if (!s2)
-		return ((char *)s1);
-
-	dp = (char*)malloc(sizeof(char)*(ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!dp)
-		return (NULL);
-
 	i = 0;
 	while (s1[i])
 	{
-		dp[i] = s1[i];
+		str[i] = s1[i];
 		i++;
 	}
-	j = 0;
-	while (s2[j])
+	i = 0;
+	while (s2[i])
 	{
-		dp[i]= s2[j];
+		str[len1] = s2[i];
+		len1++;
 		i++;
-		j++;
 	}
-	dp[i]='\0';
-	return (dp);
+	str[len1] = '\0';
+	return (str);
 }

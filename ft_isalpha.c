@@ -6,11 +6,9 @@
 /*   By: agedikog <gedikoglu_27@icloud.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:25:00 by agedikog          #+#    #+#             */
-/*   Updated: 2024/10/24 15:58:56 by agedikog         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:05:55 by agedikog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_isalpha(int c)
 {

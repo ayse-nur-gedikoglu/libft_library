@@ -6,7 +6,7 @@
 /*   By: agedikog <gedikoglu_27@icloud.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:27:42 by agedikog          #+#    #+#             */
-/*   Updated: 2024/10/24 21:43:02 by agedikog         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:15:24 by agedikog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	s_len = ft_len(s);
+	s_len = ft_strlen(s);
 	if (start >= s_len)
 		return (ft_strdup(""));
 	if (len > s_len - start)

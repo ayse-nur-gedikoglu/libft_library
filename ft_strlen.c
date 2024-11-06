@@ -6,13 +6,13 @@
 /*   By: agedikog <gedikoglu_27@icloud.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:24:49 by agedikog          #+#    #+#             */
-/*   Updated: 2024/10/24 13:21:55 by agedikog         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:02:00 by agedikog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -21,6 +21,5 @@ size_t ft_strlen(const char *s)
 	{
 		i++;
 	}
-
 	return (i);
 }

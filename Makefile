@@ -6,10 +6,9 @@
 #    By: agedikog <gedikoglu_27@icloud.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 20:27:51 by agedikog          #+#    #+#              #
-#    Updated: 2024/10/24 15:44:58 by agedikog         ###   ########.fr        #
+#    Updated: 2024/11/01 05:58:12 by agedikog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 SRCS	=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c \
@@ -18,14 +17,17 @@ SRCS	=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
 			ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
 			ft_tolower.c ft_toupper.c ft_putendl_fd.c ft_striteri.c 
+
+BONUS_SRCS 	=	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c\
 			
 OBJS    = $(SRCS:.c=.o)
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 HDRS    = libft.h
 NAME    = libft.a
 RM  = rm -rf
-GCC = gcc
-AR  = ar -crs 
-CFLAGS   = -Wall -Wextra -Werror
+GCC = cc
+AR  = ar -crs
+FLAGS   = -Wall -Wextra -Werror
 
 NO_COLOR = \033[0;39m
 GREEN = \033[0;92m
@@ -34,7 +36,7 @@ BLUE = \033[0;94m
 CYAN = \033[0;96m
 
 .c.o:
-		@$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
+		@$(GCC) $(FLAGS) -c $< -o $(<:.c=.o)
 		@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 
 $(NAME):	$(OBJS) $(HDRS)
@@ -42,12 +44,17 @@ $(NAME):	$(OBJS) $(HDRS)
 			@echo "$(GREEN)libft compiled!$(DEF_COLOR)"
 
 all:	$(NAME)
+		
+
+bonus:	$(OBJS) $(BONUS_OBJS) $(HDRS)
+		@$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
+		@echo "$(GREEN)libft BONUS compiled!$(DEF_COLOR)"
 
 re:		clean fclean all
 		@echo "$(GREEN)libft RE compiled!$(DEF_COLOR)"
 
 clean:
-		@$(RM) $(OBJS)
+		@$(RM) $(OBJS) $(BONUS_OBJS)
 		@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
 
 
@@ -55,4 +62,4 @@ fclean:	clean
 		@$(RM) $(NAME)
 		@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
 .PHONY:
-		all clean fclean re
+		all clean fclean re bonus
